@@ -1,0 +1,53 @@
+@import "~bootstrap/scss/bootstrap";
+
+.navigationPanel {
+  background: linear-gradient(#f7f5ff, #ece4ff);
+  color: rgb(47, 22, 84);
+  padding: 20px;
+  font-size: 20px;
+}
+
+.avatar {
+  width: 160px;
+}
+
+.signInCard {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10%;
+}
+
+.signInForm * {
+  margin: 5px 0;
+}
+
+.signInForm input,
+button {
+  margin: 10px;
+  border: 1px solid #dfd6f9;
+  width: 200px;
+}
+
+.signInForm input:hover,
+.signInForm button:hover {
+  box-shadow: 0 0 0 5px #eae2ff;
+  border-color: #dfd6f9;
+}
+
+#signInButton:active {
+  border-color: #896fce;
+}
+
+.signInForm button {
+  background-color: #eae2ff;
+}
+
+.signInForm {
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #dfd6f9;
+  border-radius: 10px;
+  background-color: rgb(248, 246, 255);
+}

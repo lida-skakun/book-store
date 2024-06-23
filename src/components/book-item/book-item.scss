@@ -1,0 +1,26 @@
+.bookInformation {
+  list-style: none;
+  box-shadow: #896fce 0px 8px 24px;
+  border-radius: 5px;
+  margin: 10px 20px;
+  padding: 15px;
+}
+
+.bookInformation img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 320px;
+}
+
+.bookInformation li {
+  margin-top: 10px;
+}
+
+.bookCard {
+  margin: 30px 0;
+}
+.priceAndView {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,19 @@
+.navigationPanel {
+  background: linear-gradient(#f7f5ff, #ece4ff);
+  color: rgb(47, 22, 84);
+  padding: 20px;
+  font-size: 20px;
+}
+
+#userImage,
+#basketImage {
+  width: 50px;
+}
+
+.controlPanel > * {
+  margin-right: 15px;
+}
+
+.controlPanel {
+  text-align: right;
+}

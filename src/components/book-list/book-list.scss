@@ -1,0 +1,32 @@
+#searchPanel {
+  margin: 20px 0px 0px 6px;
+}
+
+#searchPanel {
+  input,
+  .searchButton,
+  select {
+    border: 1px solid #dfd6f9;
+  }
+
+  input:hover,
+  input:focus,
+  .searchButton:hover,
+  select:hover,
+  select:focus {
+    box-shadow: 0 0 0 5px #eae2ff;
+    border-color: #dfd6f9;
+  }
+}
+
+.searchIcon {
+  width: 20px;
+}
+
+.searchButton {
+  background-color: #eae2ff;
+}
+.searchButton:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}

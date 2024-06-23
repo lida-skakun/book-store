@@ -1,0 +1,21 @@
+.emptyCart img {
+  width: 100px;
+}
+
+.emptyCart {
+  text-align: center;
+}
+
+#totalCart,
+.purchaseButton {
+  text-align: right;
+}
+
+#purchaseButton {
+  margin: 30px;
+  width: 200px;
+}
+
+#purchaseButton:active {
+  border-color: #896fce;
+}

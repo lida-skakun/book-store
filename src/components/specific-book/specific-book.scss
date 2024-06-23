@@ -1,0 +1,135 @@
+.carouselImage {
+  box-shadow: #896fce 0px 8px 24px;
+  margin-right: 20px;
+}
+
+.carouselImage {
+  img {
+    width: 100%;
+  }
+}
+
+#bookPrice {
+  background: rgb(248, 246, 255);
+  border: 1px solid #dfd6f9;
+  border-radius: 15px 50px 30px;
+  font-size: 30px;
+  padding: 15px;
+  float: left;
+  align-content: center;
+  font-weight: 900;
+}
+
+#purchasePanel {
+  color: #595c5f;
+  border-color: #dfd6f9;
+  background-color: rgb(248, 246, 255);
+  padding: 20px;
+  display: flex;
+  height: 400px;
+}
+
+#purchasePanel {
+  h5 {
+    text-align: center;
+  }
+  li {
+    font-size: 20px;
+    justify-content: space-between;
+  }
+}
+
+#purchasePanel,
+.aboutBookPanel {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+#purchasePanel,
+.aboutBookPanel {
+  li {
+    display: flex;
+    margin: 20px 0;
+    height: 30px;
+  }
+}
+.quantityOfBooksControl,
+.countQuantity {
+  flex: 2;
+}
+.quantityOfBooksControl {
+  #plusButton,
+  #minusButton {
+    flex: 1;
+  }
+  #quantityOfBooksInput {
+    flex: 2;
+  }
+}
+
+#quantityOfBooksInput,
+.selectQuantityButton {
+  border: 1px solid #dfd6f9;
+  text-align: center;
+  font-size: 16px;
+}
+
+#purchasePanel input:hover,
+#purchasePanel input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 5px #eae2ff;
+  border-color: #dfd6f9;
+}
+
+.selectQuantityButton {
+  background-color: rgb(248, 246, 255);
+  color: #595c5f;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selectQuantityButton:hover {
+  background-color: #eae2ff;
+  border-color: #dfd6f9;
+  color: #595c5f;
+}
+
+#purchasePanel input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.addToCartButton {
+  margin-top: auto;
+  width: 100%;
+}
+
+.disabledButton {
+  opacity: 0.2;
+  cursor: auto;
+}
+
+.bookDescription,
+.informationMessage {
+  border: 1px solid #dfd6f9;
+  border-radius: 5px;
+}
+
+.informationMessage {
+  text-align: center;
+  color: #ff0000;
+  background-color: #ffffff;
+  padding: 5px;
+  transition: 0.5s ease;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+.bookDescription {
+  border-color: #dfd6f9;
+  background-color: rgb(248, 246, 255);
+}
