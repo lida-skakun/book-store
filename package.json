@@ -1,6 +1,6 @@
 {
   "name": "course-final",
-  "homepage": "https://github.com/lida-skakun/book-store.git",
+  "homepage": "https://github.com/lida-skakun/book-store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
