@@ -3,6 +3,17 @@
   color: rgb(47, 22, 84);
   padding: 20px;
   font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navigationPanel * {
+  align-content: center;
+}
+
+.navigationPanel h4 {
+  font-weight: 300;
 }
 
 #userImage,

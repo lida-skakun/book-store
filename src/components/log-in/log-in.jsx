@@ -5,7 +5,7 @@ import "./log-in.scss";
 
 export default function LogIn() {
   const [login, setLogin] = useState("");
-  const [correctLogin, setUnCorrectLoginClass] = useState("hidden");
+  const [correctLogin, setUnCorrectLoginClass] = useState("hiddenBlock");
 
   const navigate = useNavigate();
   const handleEntering = () => {
@@ -18,7 +18,7 @@ export default function LogIn() {
   };
 
   const handleLoginValueChange = ({ target: { value } }) => {
-    setUnCorrectLoginClass("hidden");
+    setUnCorrectLoginClass("hiddenBlock");
     setLogin(value);
   };
 
@@ -41,7 +41,6 @@ export default function LogIn() {
               className={`form-control ${correctLogin}`}
               placeholder="Username"
               aria-label="Username"
-              aria-describedby="basic-addon1"
               id="userName"
               value={login}
               onChange={handleLoginValueChange}

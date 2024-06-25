@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
 .App {
-  display: flex;
-  flex-direction: column;
-  height: 97vh;
+  position: relative;
+  min-height: 100vh;
 }
