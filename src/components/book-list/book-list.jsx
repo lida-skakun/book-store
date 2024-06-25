@@ -11,7 +11,6 @@ import "./book-list.scss";
 export default function BookList() {
   const { items, setItems } = useItems();
   const filteredBooks = items;
-  console.log(filteredBooks.length);
   const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
     for (let i = 0; i < filteredBooks.length; i += groupSize) {
