@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/lida-skakun/book-store/static/css/main.1546772b.css",
+    "main.js": "/lida-skakun/book-store/static/js/main.923afd4d.js",
+    "static/media/search-icon.png": "/lida-skakun/book-store/static/media/search-icon.1b33b25289c74f7d8f26.png",
+    "static/media/avatar.png": "/lida-skakun/book-store/static/media/avatar.bff7003598ff1a284b65.png",
+    "static/media/cart.svg": "/lida-skakun/book-store/static/media/cart.5a1c3c755c07e59db7d65be6bc8d8bfb.svg",
+    "index.html": "/lida-skakun/book-store/index.html",
+    "main.1546772b.css.map": "/lida-skakun/book-store/static/css/main.1546772b.css.map",
+    "main.923afd4d.js.map": "/lida-skakun/book-store/static/js/main.923afd4d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1546772b.css",
+    "static/js/main.923afd4d.js"
+  ]
+}
