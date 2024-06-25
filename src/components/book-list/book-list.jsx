@@ -3,20 +3,24 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
+import { useItems } from "../../hooks/use-items";
 import BookItem from "../book-item/book-item";
 import searchItem from "../../img/search-icon.png";
 import "./book-list.scss";
 
-export default function BookList({ books }) {
-  const groupBooks = (books, groupSize) => {
+export default function BookList() {
+  const { items, setItems } = useItems();
+  const filteredBooks = items;
+  console.log(filteredBooks.length);
+  const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
-    for (let i = 0; i < books.length; i += groupSize) {
-      groups.push(books.slice(i, i + groupSize));
+    for (let i = 0; i < filteredBooks.length; i += groupSize) {
+      groups.push(filteredBooks.slice(i, i + groupSize));
     }
     return groups;
   };
 
-  const groupedBooks = groupBooks(books, 3);
+  const groupedBooks = groupBooks(filteredBooks, 3);
 
   return (
     <>
