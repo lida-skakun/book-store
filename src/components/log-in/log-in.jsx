@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/use-user";
 import avatar from "../../img/avatar.png";
 import "./log-in.scss";
 
 export default function LogIn() {
   const [login, setLogin] = useState("");
   const [correctLogin, setUnCorrectLoginClass] = useState("hiddenBlock");
+  const { user, setUser } = useUser();
 
   const navigate = useNavigate();
+
   const handleEntering = () => {
     if (login.length > 3 && login.length < 17) {
+      setUser(login);
       navigate("book-list");
     } else {
       setUnCorrectLoginClass("correctLogin");
-      console.log(false);
     }
   };
 
