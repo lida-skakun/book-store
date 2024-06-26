@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/book-store/static/css/main.1546772b.css",
-    "main.js": "/book-store/static/js/main.9f753643.js",
+    "main.css": "/book-store/static/css/main.56a7442b.css",
+    "main.js": "/book-store/static/js/main.1eda87b0.js",
     "static/media/search-icon.png": "/book-store/static/media/search-icon.1b33b25289c74f7d8f26.png",
     "static/media/avatar.png": "/book-store/static/media/avatar.bff7003598ff1a284b65.png",
     "static/media/cart.svg": "/book-store/static/media/cart.5a1c3c755c07e59db7d65be6bc8d8bfb.svg",
     "index.html": "/book-store/index.html",
-    "main.1546772b.css.map": "/book-store/static/css/main.1546772b.css.map",
-    "main.9f753643.js.map": "/book-store/static/js/main.9f753643.js.map"
+    "main.56a7442b.css.map": "/book-store/static/css/main.56a7442b.css.map",
+    "main.1eda87b0.js.map": "/book-store/static/js/main.1eda87b0.js.map"
   },
   "entrypoints": [
-    "static/css/main.1546772b.css",
-    "static/js/main.9f753643.js"
+    "static/css/main.56a7442b.css",
+    "static/js/main.1eda87b0.js"
   ]
 }
