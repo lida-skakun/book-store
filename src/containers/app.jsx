@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Layout,
@@ -19,6 +19,7 @@ function App() {
   const [user, setUser] = useState(
     LocalStorageService.get(LS_KEYS.USERS) || ""
   );
+
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function App() {
             setFilterValue: (f) => setFilterValue(f),
           }}
         >
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<SignInPage />} />
@@ -46,7 +47,7 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </ItemsProvider>
       </UserProvider>
     </div>
