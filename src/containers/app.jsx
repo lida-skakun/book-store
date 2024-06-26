@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Layout,
@@ -37,7 +37,7 @@ function App() {
             setFilterValue: (f) => setFilterValue(f),
           }}
         >
-          <HashRouter>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<SignInPage />} />
@@ -47,7 +47,7 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
-          </HashRouter>
+          </BrowserRouter>
         </ItemsProvider>
       </UserProvider>
     </div>
