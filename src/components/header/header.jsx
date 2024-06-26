@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../hooks/use-user";
 import cartIcon from "../../img/cart.svg";
 import avatar from "../../img/avatar.png";
@@ -20,7 +19,9 @@ export function Header() {
     <div className="navigationPanel">
       <h4>My book store / Lidiia Tkachova</h4>
       <div className={`controlPanel ${addClass}`}>
-        <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
+        <Link to="/cart">
+          <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
+        </Link>
         <Button variant="dark" onClick={handleClick}>
           Sing-Out
         </Button>

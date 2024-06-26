@@ -53,8 +53,22 @@ function App() {
                     </RequireAuth>
                   }
                 />
-                <Route path="specific-book" element={<SpecificBookPage />} />
-                <Route path="/cart" element={<CartPage />} />
+                <Route
+                  path="specific-book"
+                  element={
+                    <RequireAuth>
+                      <SpecificBookPage />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <RequireAuth>
+                      <CartPage />
+                    </RequireAuth>
+                  }
+                />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
