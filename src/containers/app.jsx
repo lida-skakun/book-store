@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Layout,
@@ -26,6 +26,10 @@ function App() {
     LocalStorageService.set(LS_KEYS.USER, user);
   }, [user]);
 
+  function RequireAuth({ children }) {
+    return user ? children : <Navigate to="/" />;
+  }
+
   return (
     <div className="App">
       <UserProvider value={{ user, setUser }}>
@@ -41,7 +45,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<SignInPage />} />
-                <Route path="book-list" element={<BookListPage />} />
+                <Route
+                  path="book-list"
+                  element={
+                    <RequireAuth>
+                      <BookListPage />
+                    </RequireAuth>
+                  }
+                />
                 <Route path="specific-book" element={<SpecificBookPage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="*" element={<NotFoundPage />} />

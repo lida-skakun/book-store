@@ -7,9 +7,10 @@ import avatar from "../../img/avatar.png";
 import "./header.scss";
 
 export function Header() {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
   const handleClick = () => {
+    setUser("");
     navigate("/");
   };
 
