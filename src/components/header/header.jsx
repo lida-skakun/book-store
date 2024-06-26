@@ -12,8 +12,9 @@ export function Header() {
   const handleClick = () => {
     navigate("/");
   };
-  console.log();
+
   let addClass = window.frames.location.pathname === "/" ? "hiddenBlock" : "";
+
   return (
     <div className="navigationPanel">
       <h4>My book store / Lidiia Tkachova</h4>
