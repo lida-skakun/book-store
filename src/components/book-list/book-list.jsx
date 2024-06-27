@@ -7,10 +7,15 @@ import { useItems } from "../../hooks/use-items";
 import BookItem from "../book-item/book-item";
 import searchItem from "../../img/search-icon.png";
 import "./book-list.scss";
+import { useState } from "react";
 
 export default function BookList() {
   const { items, setItems } = useItems();
-  const filteredBooks = items;
+  const [filterValue, setFilterValue] = useState("");
+  const filteredBooks = !filterValue
+    ? items
+    : items.filter((item) => item.title.includes(filterValue));
+
   const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
     for (let i = 0; i < filteredBooks.length; i += groupSize) {
@@ -21,17 +26,23 @@ export default function BookList() {
 
   const groupedBooks = groupBooks(filteredBooks, 3);
 
+  const handleSearch = ({ target: { value } }) => {
+    setFilterValue(value);
+    console.log(filterValue);
+  };
+
   return (
     <>
       <Container>
-        <Row id="searchPanel">
+        <Row id="filterPanel">
           <Col xs={5}>
-            <InputGroup size="lg">
+            <InputGroup className="searchSection" size="lg">
               <Form.Control
                 placeholder="Search by book name"
                 aria-label="Search by book name"
                 aria-describedby="basic-addon1"
                 className="form-control"
+                onChange={handleSearch}
               />
               <InputGroup.Text className="searchButton">
                 <img

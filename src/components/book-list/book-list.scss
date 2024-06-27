@@ -1,21 +1,29 @@
-#searchPanel {
+#filterPanel {
   margin: 20px 0px 0px 6px;
 }
 
-#searchPanel {
+#filterPanel {
   input,
   .searchButton,
   select {
     border: 1px solid #dfd6f9;
   }
 
-  input:hover,
-  input:focus,
-  .searchButton:hover,
+  .searchSection:hover,
+  .searchSection:focus,
+  .searchSection:active,
+  .searchSection:focus-within,
   select:hover,
   select:focus {
     box-shadow: 0 0 0 5px #eae2ff;
     border-color: #dfd6f9;
+    border-radius: 10px;
+  }
+}
+
+.searchSection {
+  input:focus {
+    box-shadow: none;
   }
 }
 
@@ -25,8 +33,4 @@
 
 .searchButton {
   background-color: #eae2ff;
-}
-.searchButton:hover {
-  background-color: #ffffff;
-  cursor: pointer;
 }
