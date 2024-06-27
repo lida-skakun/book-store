@@ -14,7 +14,7 @@ export default function BookList() {
   const [filterValue, setFilterValue] = useState("");
   const filteredBooks = !filterValue
     ? items
-    : items.filter((item) => item.title.includes(filterValue));
+    : items.filter((item) => item.title.toLowerCase().includes(filterValue));
 
   const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
@@ -27,8 +27,7 @@ export default function BookList() {
   const groupedBooks = groupBooks(filteredBooks, 3);
 
   const handleSearch = ({ target: { value } }) => {
-    setFilterValue(value);
-    console.log(filterValue);
+    setFilterValue(value.toLowerCase());
   };
 
   return (
