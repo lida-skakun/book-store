@@ -5,7 +5,7 @@ import "./book-item.scss";
 export default function BookItem({ title, author, price, image }) {
   const checkTitle = () => {};
   return (
-    <Col className="bookCard">
+    <Col className="bookCard mb-5">
       <ul className="bookInformation">
         <li>
           {image ? (
