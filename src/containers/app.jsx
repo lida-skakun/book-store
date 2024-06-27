@@ -11,7 +11,7 @@ import NotFoundPage from "../components/not-found-page/not-found-page";
 import { ItemsProvider } from "../hooks/use-items";
 import { LocalStorageService, LS_KEYS } from "../services/localStorage";
 import { UserProvider } from "../hooks/use-user";
-import defaultBooks from "../books.json";
+import defaultBooks from "../data/books.json";
 import "./app.scss";
 
 function App() {
@@ -19,8 +19,6 @@ function App() {
   const [user, setUser] = useState(
     LocalStorageService.get(LS_KEYS.USERS) || ""
   );
-
-  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     LocalStorageService.set(LS_KEYS.USER, user);
@@ -33,14 +31,7 @@ function App() {
   return (
     <div className="App">
       <UserProvider value={{ user, setUser }}>
-        <ItemsProvider
-          value={{
-            items,
-            setItems: (i) => setItems(i),
-            filterValue,
-            setFilterValue: (f) => setFilterValue(f),
-          }}
-        >
+        <ItemsProvider value={{ items, setItems }}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
