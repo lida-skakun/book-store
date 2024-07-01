@@ -9,11 +9,11 @@ import {
 } from "../routes/index";
 import NotFoundPage from "../components/not-found-page/not-found-page";
 import { ItemsProvider } from "../hooks/use-items";
+import { CartProvider } from "../hooks/use-cart";
 import { LocalStorageService, LS_KEYS } from "../services/localStorage";
 import { UserProvider } from "../hooks/use-user";
 import defaultBooks from "../data/books.json";
 import "./app.scss";
-import { CartProvider } from "../hooks/use-cart";
 
 function App() {
   const [bookList, setBookList] = useState(defaultBooks.books);
@@ -63,7 +63,7 @@ function App() {
                     }
                   />
                   <Route
-                    path="/specific-book"
+                    path="/specific-book/:id"
                     element={
                       <RequireAuth>
                         <SpecificBookPage />
