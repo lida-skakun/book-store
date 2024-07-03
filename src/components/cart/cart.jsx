@@ -21,6 +21,7 @@ export default function Cart() {
         <CartItem />
         <CartItem />
         <h5 id="totalCart">Total price, $</h5>
+        <button>Очистити кошик!</button>
       </Container>
     </div>
   );
