@@ -8,7 +8,8 @@ import {
   SpecificBookPage,
 } from "../routes/index";
 import NotFoundPage from "../components/not-found-page/not-found-page";
-import { ItemsProvider } from "../hooks/use-items";
+import ScrollToTop from "../components/scroll-to-top/scroll-to-top";
+import { BooksProvider } from "../hooks/use-books";
 import { CartProvider } from "../hooks/use-cart";
 import { LocalStorageService, LS_KEYS } from "../services/localStorage";
 import { UserProvider } from "../hooks/use-user";
@@ -22,24 +23,17 @@ function App() {
     LocalStorageService.get(LS_KEYS.USERS) || ""
   );
 
-  const [cartItems, setCartItems] = useState(
-    LocalStorageService.get(LS_KEYS.CART) || {}
+  const [cart, setCart] = useState(
+    LocalStorageService.get(LS_KEYS.CART) || { addedBooks: {} }
   );
-  {
-    /* useEffect(() => {
-    const getDatas = async () => {
-      const response = await fetch("../data/books.json");
-      const data = await response.json();
-      setBookList(data);
-    };
-    getDatas();
-  }, []);
-  */
-  }
+
   useEffect(() => {
     LocalStorageService.set(LS_KEYS.USERS, user);
-    LocalStorageService.set(LS_KEYS.CART, cartItems);
-  }, [user, cartItems]);
+  }, [user]);
+
+  useEffect(() => {
+    LocalStorageService.set(LS_KEYS.CART, cart);
+  }, [cart]);
 
   function RequireAuth({ children }) {
     return user ? children : <Navigate to="/" />;
@@ -48,9 +42,10 @@ function App() {
   return (
     <div className="App">
       <UserProvider value={{ user, setUser }}>
-        <CartProvider value={{ cartItems, setCartItems }}>
-          <ItemsProvider value={{ bookList, setBookList }}>
+        <BooksProvider value={{ bookList, setBookList }}>
+          <CartProvider value={{ cart, setCart }}>
             <BrowserRouter>
+              <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<SignInPage />} />
@@ -82,8 +77,8 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>
-          </ItemsProvider>
-        </CartProvider>
+          </CartProvider>
+        </BooksProvider>
       </UserProvider>
     </div>
   );
