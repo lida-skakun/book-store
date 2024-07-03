@@ -1,20 +1,20 @@
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { useItems } from "../../hooks/use-items";
+import { useBooks } from "../../hooks/use-books";
 import BookItem from "../book-item/book-item";
 import searchItem from "../../img/search-icon.png";
 import "./book-list.scss";
-import { useState } from "react";
 
 export default function BookList() {
-  const { items, setItems } = useItems();
+  const { bookList } = useBooks();
   const [filterValue, setFilterValue] = useState("");
   const filteredBooks = !filterValue
-    ? items
-    : items.filter((item) => item.title.toLowerCase().includes(filterValue));
+    ? bookList
+    : bookList.filter((item) => item.title.toLowerCase().includes(filterValue));
 
   const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
@@ -70,10 +70,13 @@ export default function BookList() {
             {group.map((book) => (
               <Col key={book.id}>
                 <BookItem
+                  id={book.id}
                   title={book.title}
                   author={book.author}
                   price={book.price}
                   image={book.image}
+                  level={book.level}
+                  tags={book.tags}
                 />
               </Col>
             ))}
