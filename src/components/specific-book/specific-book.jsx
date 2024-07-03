@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,29 +8,97 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { useItems } from "../../hooks/use-items";
+import { useBooks } from "../../hooks/use-books";
+import { useCart } from "../../hooks/use-cart";
+import imgNotFound from "../../img/no-image.jpg";
+
 import "./specific-book.scss";
 
 export default function SpecificBook() {
   const { id } = useParams();
-  const books = useItems().bookList;
+  const books = useBooks().bookList;
   const selectedBook = books.find((book) => book.id == id);
+  const [totalPrice, setTotalPrice] = useState(selectedBook.price);
+  const [disabledPlusButton, setDisabledPlusButton] = useState("");
+  const [disabledMinusButton, setDisabledMinusButton] = useState("");
+  const [informationMessage, setInformationMessage] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const { cart, setCart } = useCart();
+
+  useEffect(() => {
+    setTotalPrice((selectedBook.price * quantity).toFixed(2));
+    if (quantity >= selectedBook.amount) {
+      setDisabledPlusButton("disabled");
+      showMessage(`Only ${selectedBook.amount} books available`);
+    } else setDisabledPlusButton("");
+    if (quantity <= 1) {
+      setDisabledMinusButton("disabled");
+    } else setDisabledMinusButton("");
+  }, [quantity]);
+
+  const incrementQuantity = () => setQuantity((prevCount) => prevCount + 1);
+  const decrementQuantity = () => setQuantity((prevCount) => prevCount - 1);
+
+  const showMessage = (text) => {
+    setInformationMessage(text);
+    setTimeout(() => {
+      setInformationMessage("");
+    }, 3000);
+  };
+
+  const addToCart = () => {
+    setCart((prevState) => {
+      const updatedCart = {
+        ...prevState,
+        addedBooks: [
+          ...prevState.addedBooks,
+          { id: selectedBook.id, quantity: quantity },
+        ],
+      };
+      console.log("Updated cart state: ", updatedCart);
+      return updatedCart;
+    });
+  };
+
+  const changeQuantityManual = ({ target }) => {
+    if (target.value === "") {
+      setQuantity("");
+    } else if (target.value < 1) {
+      setQuantity(1);
+      showMessage("Sorry, minimum quantity of books is 1");
+    } else if (target.value > 42) {
+      setQuantity(42);
+    } else {
+      setQuantity(target.value);
+    }
+    setTimeout(() => {
+      target.blur();
+    }, 1000);
+  };
+
+  const handleInputBlur = ({ target: { value } }) => {
+    value === "" && setQuantity(1);
+  };
+
+  const checkBookImage = selectedBook.image ? (
+    <img src={selectedBook.image} alt={selectedBook.title} />
+  ) : (
+    <img src={imgNotFound} alt="No image" />
+  );
+
+  const tags = selectedBook.tags.map((tag) => (
+    <span key={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}, </span>
+  ));
 
   return (
     <>
-      <Container className="mt-5 mb-5">
+      <Container className="mt-5">
         <Row>
           <Col xs={4}>
-            <Carousel fade data-bs-theme="dark" className="carouselImage">
-              <Carousel.Item>
-                <img src={selectedBook.image} />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img src={selectedBook.image} />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img src={selectedBook.image} />
-              </Carousel.Item>
+            <Carousel data-bs-theme="dark" className="carouselImage">
+              <Carousel.Item>{checkBookImage}</Carousel.Item>
+              <Carousel.Item>{checkBookImage}</Carousel.Item>
+              <Carousel.Item>{checkBookImage}</Carousel.Item>
             </Carousel>
           </Col>
           <Col xs={4} className="aboutBookPanel">
@@ -50,8 +119,8 @@ export default function SpecificBook() {
                 <span>{` ${selectedBook.level}`}</span>
               </li>
               <li>
-                <b>Book tags:</b>
-                <span>{` ${selectedBook.tags}`}</span>
+                <b>Book tags: </b>
+                {tags}
               </li>
             </ul>
             <p id="bookPrice">{selectedBook.price}$</p>
@@ -69,24 +138,29 @@ export default function SpecificBook() {
                   <span className="countQuantity">Count, pc</span>
                   <InputGroup className="quantityOfBooksControl">
                     <button
-                      className="selectQuantityButton disabledButton"
+                      className={`selectQuantityButton ${disabledMinusButton}`}
                       type="button"
                       id="minusButton"
-                      disabled
+                      onClick={decrementQuantity}
+                      disabled={disabledMinusButton ? true : false}
                     >
                       -
                     </button>
                     <Form.Control
                       aria-label="Amount (to the nearest dollar)"
-                      value={1}
+                      value={quantity}
+                      onChange={changeQuantityManual}
+                      onBlur={handleInputBlur}
                       type="number"
                       className="quantityOfBooksInput"
                       id="quantityOfBooksInput"
                     />
                     <button
-                      className="selectQuantityButton"
+                      className={`selectQuantityButton ${disabledPlusButton}`}
                       type="button"
                       id="plusButton"
+                      onClick={incrementQuantity}
+                      disabled={disabledPlusButton ? true : false}
                     >
                       +
                     </button>
@@ -94,23 +168,29 @@ export default function SpecificBook() {
                 </li>
                 <li>
                   <span>Total price, $</span>
-                  <span id="totalValueOfBooks"></span>
+                  <span id="totalValueOfBooks">{totalPrice}</span>
                 </li>
                 <p
                   id="informationMessage"
-                  className="informationMessage hidden"
+                  className={
+                    informationMessage ? "informationMessage" : "hidden"
+                  }
                 >
-                  The entered number cannot be less than 1 piece.
+                  {informationMessage}
                 </p>
               </ul>
-              <Button variant="dark" className="addToCartButton">
+              <Button
+                variant="dark"
+                className="addToCartButton"
+                onClick={addToCart}
+              >
                 Add to cart
               </Button>
             </Card>
           </Col>
         </Row>
         <Row>
-          <Col xs={8} className="bookDescription mt-5 p-5">
+          <Col xs={8} className="bookDescription p-5 mb-5 mt-5">
             <h5>Description:</h5>
             <p>{selectedBook.description}</p>
           </Col>
