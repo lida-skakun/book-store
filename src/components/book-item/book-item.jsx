@@ -8,11 +8,7 @@ export default function BookItem({ id, title, author, price, image }) {
     <Col className="bookCard mb-5">
       <ul className="bookInformation">
         <li>
-          {image ? (
-            <img src={image} alt={title} />
-          ) : (
-            <img src={imgNotFound} alt={title} />
-          )}
+          <img src={image ? image : imgNotFound} alt={title} />
         </li>
         <li>
           <strong>
