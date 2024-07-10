@@ -1,4 +1,9 @@
-.carouselImage {
+.hidden {
+  display: none;
+}
+
+.carouselImage,
+.noImageFound {
   box-shadow: #896fce 0px 8px 24px;
   margin-right: 20px;
 }
@@ -7,6 +12,10 @@
   img {
     width: 100%;
   }
+}
+
+.noImageFound {
+  border-radius: 5px;
 }
 
 #bookPrice {
@@ -115,6 +124,17 @@
   background-color: inherit;
 }
 
+.inCart {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.inCart a {
+  font-size: 20px;
+  color: rgb(137, 111, 206);
+}
+
 .bookDescription,
 .informationMessage {
   border: 1px solid #dfd6f9;
@@ -130,11 +150,8 @@
   font-size: 14px;
 }
 
-.hidden {
-  display: none;
-}
-
 .bookDescription {
   border-color: #dfd6f9;
   background-color: rgb(248, 246, 255);
+  line-height: 2;
 }
