@@ -8,7 +8,9 @@ export default function BookItem({ id, title, author, price, image }) {
     <Col className="bookCard mb-5">
       <ul className="bookInformation">
         <li>
-          <img src={image ? image : imgNotFound} alt={title} />
+          <Link to={`/specific-book/${id}`}>
+            <img src={image ? image : imgNotFound} alt={title} />
+          </Link>
         </li>
         <li>
           <strong>
