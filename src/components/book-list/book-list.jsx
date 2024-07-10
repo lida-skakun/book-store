@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -12,9 +12,24 @@ import "./book-list.scss";
 export default function BookList() {
   const { bookList } = useBooks();
   const [filterValue, setFilterValue] = useState("");
-  const filteredBooks = !filterValue
-    ? bookList
-    : bookList.filter((item) => item.title.toLowerCase().includes(filterValue));
+  const [priceRanking, setPriceRanking] = useState({ min: 0, max: 9999 });
+  const [filteredBooks, setFilteredBooks] = useState(bookList);
+
+  useEffect(() => {
+    setFilteredBooks(
+      filterValue
+        ? bookList.filter(
+            (book) =>
+              book.title.toLowerCase().includes(filterValue) &&
+              book.price > priceRanking.min &&
+              book.price < priceRanking.max
+          )
+        : bookList.filter(
+            (book) =>
+              book.price > priceRanking.min && book.price < priceRanking.max
+          )
+    );
+  }, [priceRanking, filterValue]);
 
   const groupBooks = (filteredBooks, groupSize) => {
     const groups = [];
@@ -28,6 +43,18 @@ export default function BookList() {
 
   const handleSearch = ({ target: { value } }) => {
     setFilterValue(value.toLowerCase());
+  };
+
+  const selectBookPrice = ({ target: { value } }) => {
+    if (value === "1") {
+      setPriceRanking({ min: 0, max: 9999 });
+    } else if (value === "2") {
+      setPriceRanking({ min: 0, max: 14.99 });
+    } else if (value === "3") {
+      setPriceRanking({ min: 15, max: 29.99 });
+    } else if (value === "4") {
+      setPriceRanking({ min: 30, max: 9999 });
+    }
   };
 
   return (
@@ -57,6 +84,7 @@ export default function BookList() {
             <select
               className="form-select form-select-lg mb-3"
               aria-label="book price selector"
+              onChange={selectBookPrice}
             >
               <option value="1">Price All</option>
               <option value="2">cheaper than 15$</option>
