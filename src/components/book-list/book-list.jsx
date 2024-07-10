@@ -96,7 +96,7 @@ export default function BookList() {
         {groupedBooks.map((group, groupIndex) => (
           <Row key={groupIndex}>
             {group.map((book) => (
-              <Col key={book.id}>
+              <Col xs={4} key={book.id}>
                 <BookItem
                   id={book.id}
                   title={book.title}
