@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -11,11 +11,12 @@ import Form from "react-bootstrap/Form";
 import { useBooks } from "../../hooks/use-books";
 import { useCart } from "../../hooks/use-cart";
 import imgNotFound from "../../img/no-image.jpg";
-
+import itemInCart from "../../img/itemInCart.png";
 import "./specific-book.scss";
 
 export default function SpecificBook() {
   const { id } = useParams();
+  const { cart, setCart } = useCart();
   const books = useBooks().bookList;
   const selectedBook = books.find((book) => book.id == id);
   const [totalPrice, setTotalPrice] = useState(selectedBook.price);
@@ -23,7 +24,9 @@ export default function SpecificBook() {
   const [disabledMinusButton, setDisabledMinusButton] = useState("");
   const [informationMessage, setInformationMessage] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const { cart, setCart } = useCart();
+  const [purchasedBook, setPurchasedBook] = useState(
+    cart.addedBooks.find((book) => book.id == selectedBook.id) ? true : false
+  );
 
   useEffect(() => {
     setTotalPrice((selectedBook.price * quantity).toFixed(2));
@@ -48,14 +51,24 @@ export default function SpecificBook() {
 
   const addToCart = () => {
     setCart((prevState) => {
+      const currentAddedBooks = Array.isArray(prevState.addedBooks)
+        ? prevState.addedBooks
+        : [];
       const updatedCart = {
         ...prevState,
         addedBooks: [
-          ...prevState.addedBooks,
-          { id: selectedBook.id, quantity: quantity },
+          ...currentAddedBooks,
+          {
+            id: selectedBook.id,
+            quantity: quantity,
+            title: selectedBook.title,
+            price: selectedBook.price,
+            shortDescription: selectedBook.shortDescription,
+            image: selectedBook.image,
+            author: selectedBook.author,
+          },
         ],
       };
-      console.log("Updated cart state: ", updatedCart);
       return updatedCart;
     });
   };
@@ -71,6 +84,7 @@ export default function SpecificBook() {
     } else {
       setQuantity(target.value);
     }
+
     setTimeout(() => {
       target.blur();
     }, 1000);
@@ -80,27 +94,45 @@ export default function SpecificBook() {
     value === "" && setQuantity(1);
   };
 
-  const checkBookImage = selectedBook.image ? (
-    <img src={selectedBook.image} alt={selectedBook.title} />
-  ) : (
-    <img src={imgNotFound} alt="No image" />
-  );
-
   const tags = selectedBook.tags.map((tag) => (
     <span key={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}, </span>
   ));
+
+  const bookImage = selectedBook.image ? (
+    <Carousel data-bs-theme="dark" className="carouselImage">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <Carousel.Item key={i}>
+          <img src={selectedBook.image} alt={selectedBook.title} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
+  ) : (
+    <img src={imgNotFound} alt="No image" className="noImageFound" />
+  );
+
+  const buttonPurchase = (
+    <Button
+      variant="dark"
+      className="addToCartButton"
+      onClick={() => {
+        addToCart();
+      }}
+    >
+      Add to cart
+    </Button>
+  );
+
+  useEffect(() => {
+    cart.addedBooks.find((book) => book.id == selectedBook.id)
+      ? setPurchasedBook(true)
+      : setPurchasedBook(false);
+  }, [cart]);
 
   return (
     <>
       <Container className="mt-5">
         <Row>
-          <Col xs={4}>
-            <Carousel data-bs-theme="dark" className="carouselImage">
-              <Carousel.Item>{checkBookImage}</Carousel.Item>
-              <Carousel.Item>{checkBookImage}</Carousel.Item>
-              <Carousel.Item>{checkBookImage}</Carousel.Item>
-            </Carousel>
-          </Col>
+          <Col xs={4}>{bookImage}</Col>
           <Col xs={4} className="aboutBookPanel">
             <h4>
               {selectedBook.title}, {selectedBook.author}
@@ -179,13 +211,14 @@ export default function SpecificBook() {
                   {informationMessage}
                 </p>
               </ul>
-              <Button
-                variant="dark"
-                className="addToCartButton"
-                onClick={addToCart}
-              >
-                Add to cart
-              </Button>
+              {purchasedBook ? (
+                <p className="inCart">
+                  <img src={itemInCart} width={40} />
+                  <Link to="/cart">Added to cart</Link>
+                </p>
+              ) : (
+                buttonPurchase
+              )}
             </Card>
           </Col>
         </Row>
