@@ -24,7 +24,7 @@ function App() {
   );
 
   const [cart, setCart] = useState(
-    LocalStorageService.get(LS_KEYS.CART) || { addedBooks: {} }
+    LocalStorageService.get(LS_KEYS.CART) || { addedBooks: [] }
   );
 
   useEffect(() => {
