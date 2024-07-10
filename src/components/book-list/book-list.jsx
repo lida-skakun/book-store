@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import { useBooks } from "../../hooks/use-books";
 import BookItem from "../book-item/book-item";
 import searchItem from "../../img/search-icon.png";
+import NoBooksFound from "../no-books-found/no-books-found";
 import "./book-list.scss";
 
 export default function BookList() {
@@ -93,23 +94,27 @@ export default function BookList() {
             </select>
           </div>
         </Row>
-        {groupedBooks.map((group, groupIndex) => (
-          <Row key={groupIndex}>
-            {group.map((book) => (
-              <Col xs={4} key={book.id}>
-                <BookItem
-                  id={book.id}
-                  title={book.title}
-                  author={book.author}
-                  price={book.price}
-                  image={book.image}
-                  level={book.level}
-                  tags={book.tags}
-                />
-              </Col>
-            ))}
-          </Row>
-        ))}
+        {filteredBooks.length == 0 ? (
+          <NoBooksFound />
+        ) : (
+          groupedBooks.map((group, groupIndex) => (
+            <Row key={groupIndex}>
+              {group.map((book) => (
+                <Col xs={4} key={book.id}>
+                  <BookItem
+                    id={book.id}
+                    title={book.title}
+                    author={book.author}
+                    price={book.price}
+                    image={book.image}
+                    level={book.level}
+                    tags={book.tags}
+                  />
+                </Col>
+              ))}
+            </Row>
+          ))
+        )}
       </Container>
     </>
   );
