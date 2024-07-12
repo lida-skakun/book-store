@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
+import { useUser } from "../../hooks/use-user";
 import { useBooks } from "../../hooks/use-books";
 import { useCart } from "../../hooks/use-cart";
 import imgNotFound from "../../img/no-image.jpg";
@@ -16,6 +17,7 @@ import "./specific-book.scss";
 
 export default function SpecificBook() {
   const { id } = useParams();
+  const { user } = useUser();
   const { cart, setCart } = useCart();
   const books = useBooks().bookList;
   const selectedBook = books.find((book) => book.id == id);
@@ -59,6 +61,7 @@ export default function SpecificBook() {
         addedBooks: [
           ...currentAddedBooks,
           {
+            customer: user,
             id: selectedBook.id,
             quantity: quantity,
             title: selectedBook.title,
@@ -66,6 +69,7 @@ export default function SpecificBook() {
             shortDescription: selectedBook.shortDescription,
             image: selectedBook.image,
             author: selectedBook.author,
+            limit: selectedBook.amount,
           },
         ],
       };
@@ -75,16 +79,15 @@ export default function SpecificBook() {
 
   const changeQuantityManual = ({ target }) => {
     if (target.value === "") {
-      setQuantity("");
+      setQuantity(0);
     } else if (target.value < 1) {
       setQuantity(1);
       showMessage("Sorry, minimum quantity of books is 1");
     } else if (target.value > 42) {
       setQuantity(42);
     } else {
-      setQuantity(target.value);
+      setQuantity(Number(target.value));
     }
-
     setTimeout(() => {
       target.blur();
     }, 1000);
