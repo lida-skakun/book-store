@@ -1,17 +1,41 @@
+.cart {
+  padding-bottom: 50px;
+}
+
+.cart a {
+  text-decoration: none;
+  margin: 10px;
+}
+
 .emptyCart img {
-  width: 100px;
+  width: 300px;
 }
 
 .emptyCart {
   text-align: center;
+  color: #666666;
 }
 
 #totalCart,
-.purchaseButton {
+.purchaseAndContinueButtons {
   text-align: right;
 }
+#continueButton {
+  border: 1px solid #dfd6f9;
+  background-color: #eae2ff;
+  color: #000000;
+}
 
-#purchaseButton {
+#continueButton:hover {
+  box-shadow: 0 0 0 5px #eae2ff;
+  border-color: #dfd6f9;
+}
+
+#continueButton:active {
+  border-color: #896fce;
+}
+#purchaseButton,
+#continueButton {
   margin: 30px;
   width: 200px;
 }
