@@ -18,9 +18,12 @@ export function Header() {
   };
 
   useEffect(() => {
-    if (cart.addedBooks) {
+    let currentUserCart = cart.addedBooks.filter(
+      (book) => book.customer === user
+    );
+    if (currentUserCart) {
       setBooksInCart(
-        cart.addedBooks.reduce(
+        currentUserCart.reduce(
           (acc, currentValue) => acc + Number(currentValue.quantity),
           0
         )
@@ -28,7 +31,7 @@ export function Header() {
     } else {
       setBooksInCart(0);
     }
-  }, [cart]);
+  }, [cart, user]);
 
   let addClass = window.frames.location.pathname === "/" ? "hiddenBlock" : "";
 

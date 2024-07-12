@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Row, Col, InputGroup, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/use-cart";
+import { useUser } from "../../hooks/use-user";
 import imgNotFound from "../../img/no-image.jpg";
 import removeIcon from "../../img/delete-icon.png";
 import "./cart-item.scss";
@@ -16,14 +17,23 @@ export default function CartItem({
   limit,
 }) {
   const { cart, setCart } = useCart();
+  const { user } = useUser();
   const [disabledPlusButton, setDisabledPlusButton] = useState("");
   const [disabledMinusButton, setDisabledMinusButton] = useState("");
   const [totalPrice, setTotalPrice] = useState((quantity * price).toFixed(2));
 
   const handleRemoveBook = () => {
-    setCart((prevState) => ({
-      addedBooks: [...prevState.addedBooks.filter((book) => book.id !== id)],
-    }));
+    cart.addedBooks.filter((book, indexDelete) => {
+      if (book.customer === user && book.id == id) {
+        setCart((prevState) => ({
+          addedBooks: [
+            ...prevState.addedBooks.filter(
+              (order, index) => index !== indexDelete
+            ),
+          ],
+        }));
+      }
+    });
   };
 
   useEffect(() => {

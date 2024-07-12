@@ -126,7 +126,9 @@ export default function SpecificBook() {
   );
 
   useEffect(() => {
-    cart.addedBooks.find((book) => book.id == selectedBook.id)
+    cart.addedBooks.find(
+      (book) => book.id == selectedBook.id && book.customer === user
+    )
       ? setPurchasedBook(true)
       : setPurchasedBook(false);
   }, [cart]);
