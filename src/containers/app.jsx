@@ -44,7 +44,7 @@ function App() {
       <UserProvider value={{ user, setUser }}>
         <BooksProvider value={{ bookList, setBookList }}>
           <CartProvider value={{ cart, setCart }}>
-            <BrowserRouter>
+            <BrowserRouter basename="course-final">
               <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Layout />}>
