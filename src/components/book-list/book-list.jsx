@@ -32,16 +32,6 @@ export default function BookList() {
     );
   }, [priceRanking, filterValue]);
 
-  const groupBooks = (filteredBooks, groupSize) => {
-    const groups = [];
-    for (let i = 0; i < filteredBooks.length; i += groupSize) {
-      groups.push(filteredBooks.slice(i, i + groupSize));
-    }
-    return groups;
-  };
-
-  const groupedBooks = groupBooks(filteredBooks, 3);
-
   const handleSearch = ({ target: { value } }) => {
     setFilterValue(value.toLowerCase());
   };
@@ -62,7 +52,7 @@ export default function BookList() {
     <>
       <Container>
         <Row id="filterPanel">
-          <Col xs={5}>
+          <Col sm={12} md={6}>
             <InputGroup className="searchSection" size="lg">
               <Form.Control
                 placeholder="Search by book name"
@@ -80,8 +70,7 @@ export default function BookList() {
               </InputGroup.Text>
             </InputGroup>
           </Col>
-
-          <div className="col-3">
+          <Col sm={6} md={4}>
             <select
               className="form-select form-select-lg mb-3"
               aria-label="book price selector"
@@ -92,29 +81,27 @@ export default function BookList() {
               <option value="3">from 15$ to 30$</option>
               <option value="4">30$ and more</option>
             </select>
-          </div>
+          </Col>
         </Row>
-        {filteredBooks.length == 0 ? (
-          <NoBooksFound />
-        ) : (
-          groupedBooks.map((group, groupIndex) => (
-            <Row key={groupIndex}>
-              {group.map((book) => (
-                <Col xs={4} key={book.id}>
-                  <BookItem
-                    id={book.id}
-                    title={book.title}
-                    author={book.author}
-                    price={book.price}
-                    image={book.image}
-                    level={book.level}
-                    tags={book.tags}
-                  />
-                </Col>
-              ))}
-            </Row>
-          ))
-        )}
+        <Row>
+          {filteredBooks.length == 0 ? (
+            <NoBooksFound />
+          ) : (
+            filteredBooks.map((col) => (
+              <Col md={12} lg={6} xl={4} key={col.id}>
+                <BookItem
+                  id={col.id}
+                  title={col.title}
+                  author={col.author}
+                  price={col.price}
+                  image={col.image}
+                  level={col.level}
+                  tags={col.tags}
+                />
+              </Col>
+            ))
+          )}
+        </Row>
       </Container>
     </>
   );
