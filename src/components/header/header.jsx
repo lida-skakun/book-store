@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Nav, Navbar, Container, NavDropdown, Button } from "react-bootstrap";
+import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../hooks/use-user";
 import { useCart } from "../../hooks/use-cart";
@@ -33,11 +33,6 @@ export function Header() {
     }
   }, [cart, user]);
 
-  let addClass =
-    window.frames.location.hash === "#/"
-      ? "hiddenBlock"
-      : "d-flex justify-content-end";
-  console.log(window.frames.location);
   const quantityOfBooksInCart = booksInCart > 0 && (
     <span className="quantityOfBooksInCart">{booksInCart}</span>
   );
@@ -51,25 +46,30 @@ export function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
-          {window.frames.location.hash !== "#/" && (
-            <Nav className="align-items-center">
-              <Nav.Item>
-                <Nav.Link eventKey="1" as={Link} to="/cart">
-                  {quantityOfBooksInCart}
-                  <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Button variant="dark" onClick={handleClick}>
-                  Sing-Out
-                </Button>
-              </Nav.Item>
-              <Nav.Item>
-                <img src={avatar} alt="user image" id="userImage" />
-                <span>{user}</span>
-              </Nav.Item>
-            </Nav>
-          )}
+          {window.frames.location.hash !== "#/" ||
+            (window.frames.location.hash !== "" && (
+              <Nav className="align-items-center">
+                <Nav.Item>
+                  <Nav.Link eventKey="1" as={Link} to="/cart">
+                    {quantityOfBooksInCart}
+                    <img
+                      src={cartIcon}
+                      alt="image 0f bucket"
+                      id="basketImage"
+                    />
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Button variant="dark" onClick={handleClick}>
+                    Sing-Out
+                  </Button>
+                </Nav.Item>
+                <Nav.Item>
+                  <img src={avatar} alt="user image" id="userImage" />
+                  <span>{user}</span>
+                </Nav.Item>
+              </Nav>
+            ))}
         </Navbar.Collapse>
       </Container>
     </Navbar>
