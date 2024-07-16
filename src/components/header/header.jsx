@@ -46,8 +46,8 @@ export function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
-          {window.frames.location.hash !== "#/" ||
-            (window.frames.location.hash !== "" && (
+          {window.frames.location.hash !== "#/" &&
+            window.frames.location.hash !== "" && (
               <Nav className="align-items-center">
                 <Nav.Item>
                   <Nav.Link eventKey="1" as={Link} to="/cart">
@@ -69,7 +69,7 @@ export function Header() {
                   <span>{user}</span>
                 </Nav.Item>
               </Nav>
-            ))}
+            )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
