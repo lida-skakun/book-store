@@ -9,7 +9,11 @@ export default function BookItem({ id, title, author, price, image }) {
       <ul className="bookInformation">
         <li>
           <Link to={`/specific-book/${id}`}>
-            <img src={image ? image : imgNotFound} alt={title} />
+            <img
+              src={image ? image : imgNotFound}
+              alt={title}
+              className="img-fluid"
+            />
           </Link>
         </li>
         <li>
