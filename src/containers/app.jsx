@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Layout,
@@ -44,7 +44,7 @@ function App() {
       <UserProvider value={{ user, setUser }}>
         <BooksProvider value={{ bookList, setBookList }}>
           <CartProvider value={{ cart, setCart }}>
-            <BrowserRouter basename="book-store">
+            <HashRouter>
               <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Layout />}>
@@ -76,7 +76,7 @@ function App() {
                   <Route path="*" element={<NotFoundPage />} />
                 </Route>
               </Routes>
-            </BrowserRouter>
+            </HashRouter>
           </CartProvider>
         </BooksProvider>
       </UserProvider>
