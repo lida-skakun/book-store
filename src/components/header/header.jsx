@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import { Container, Nav, Navbar, NavItem } from "react-bootstrap";
+import { Nav, Navbar, Container, NavDropdown, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../hooks/use-user";
 import { useCart } from "../../hooks/use-cart";
@@ -35,43 +34,44 @@ export function Header() {
   }, [cart, user]);
 
   let addClass =
-    window.frames.location.pathname === "/book-store" ? "hiddenBlock" : "";
-
+    window.frames.location.hash === "#/"
+      ? "hiddenBlock"
+      : "d-flex justify-content-end";
+  console.log(window.frames.location);
   const quantityOfBooksInCart = booksInCart > 0 && (
     <span className="quantityOfBooksInCart">{booksInCart}</span>
   );
 
   return (
-    <div className="navigationPanel">
-      {/**<div className={`controlPanel ${addClass}`}>**/}
-      <Navbar collapseOnSelect expand="lg">
-        <Navbar.Brand href="#home">
+    <Navbar collapseOnSelect expand="lg" className="navigationPanel">
+      <Container>
+        <Navbar.Brand as={Link} to="/book-list">
           <h4>My book store / Lidiia Tkachova</h4>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav d-flex" />
-        <Navbar.Collapse
-          id="responsive-navbar-nav"
-          className="d-flex justify-content-end"
-        >
-          <Nav className="align-items-center">
-            <Nav.Item>
-              <Nav.Link eventKey="1" as={Link} to="/cart">
-                {quantityOfBooksInCart}
-                <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Button variant="dark" onClick={handleClick}>
-                Sing-Out
-              </Button>
-            </Nav.Item>
-            <Nav.Item>
-              <img src={avatar} alt="user image" id="userImage" />
-              <span>{user}</span>
-            </Nav.Item>
-          </Nav>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto"></Nav>
+          {window.frames.location.hash !== "#/" && (
+            <Nav className="align-items-center">
+              <Nav.Item>
+                <Nav.Link eventKey="1" as={Link} to="/cart">
+                  {quantityOfBooksInCart}
+                  <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Button variant="dark" onClick={handleClick}>
+                  Sing-Out
+                </Button>
+              </Nav.Item>
+              <Nav.Item>
+                <img src={avatar} alt="user image" id="userImage" />
+                <span>{user}</span>
+              </Nav.Item>
+            </Nav>
+          )}
         </Navbar.Collapse>
-      </Navbar>
-    </div>
+      </Container>
+    </Navbar>
   );
 }
