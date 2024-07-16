@@ -1,11 +1,8 @@
 .navigationPanel {
   background: linear-gradient(#f7f5ff, #ece4ff);
   color: rgb(47, 22, 84);
-  padding: 20px;
+  padding: 10px 20px;
   font-size: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .navigationPanel * {
@@ -43,4 +40,10 @@
   color: #000000;
   font-size: 12px;
   font-weight: bold;
+}
+
+@media (max-width: 420px) {
+  .navigationPanel h4 {
+    font-size: 16px;
+  }
 }

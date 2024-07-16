@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import { Container, Nav, Navbar, NavItem } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../hooks/use-user";
 import { useCart } from "../../hooks/use-cart";
@@ -33,7 +34,8 @@ export function Header() {
     }
   }, [cart, user]);
 
-  let addClass = window.frames.location.pathname === "/" ? "hiddenBlock" : "";
+  let addClass =
+    window.frames.location.pathname === "/book-store" ? "hiddenBlock" : "";
 
   const quantityOfBooksInCart = booksInCart > 0 && (
     <span className="quantityOfBooksInCart">{booksInCart}</span>
@@ -41,18 +43,35 @@ export function Header() {
 
   return (
     <div className="navigationPanel">
-      <h4>My book store / Lidiia Tkachova</h4>
-      <div className={`controlPanel ${addClass}`}>
-        <Link to="/cart" className="linkToBasket">
-          {quantityOfBooksInCart}
-          <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
-        </Link>
-        <Button variant="dark" onClick={handleClick}>
-          Sing-Out
-        </Button>
-        <img src={avatar} alt="user image" id="userImage" />
-        <span>{user}</span>
-      </div>
+      {/**<div className={`controlPanel ${addClass}`}>**/}
+      <Navbar collapseOnSelect expand="lg">
+        <Navbar.Brand href="#home">
+          <h4>My book store / Lidiia Tkachova</h4>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav d-flex" />
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          className="d-flex justify-content-end"
+        >
+          <Nav className="align-items-center">
+            <Nav.Item>
+              <Nav.Link eventKey="1" as={Link} to="/cart">
+                {quantityOfBooksInCart}
+                <img src={cartIcon} alt="image 0f bucket" id="basketImage" />
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Button variant="dark" onClick={handleClick}>
+                Sing-Out
+              </Button>
+            </Nav.Item>
+            <Nav.Item>
+              <img src={avatar} alt="user image" id="userImage" />
+              <span>{user}</span>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </div>
   );
 }
