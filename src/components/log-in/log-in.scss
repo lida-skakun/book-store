@@ -61,3 +61,15 @@
 .hiddenBlock {
   display: none;
 }
+
+@media (max-width: 800px) {
+  .signInCard {
+    margin: 10% auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .avatar {
+    width: 100px;
+  }
+}
