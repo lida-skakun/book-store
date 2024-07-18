@@ -20,10 +20,14 @@
 .purchaseAndContinueButtons {
   text-align: right;
 }
+
+.purchaseAndContinueButtons a {
+  color: #000000;
+}
+
 #continueButton {
   border: 1px solid #dfd6f9;
   background-color: #eae2ff;
-  color: #000000;
 }
 
 #continueButton:hover {
@@ -34,6 +38,7 @@
 #continueButton:active {
   border-color: #896fce;
 }
+
 #purchaseButton,
 #continueButton {
   margin: 30px;
@@ -42,4 +47,11 @@
 
 #purchaseButton:active {
   border-color: #896fce;
+}
+
+@media (max-width: 768px) {
+  #purchaseButton,
+  #continueButton {
+    margin: 15px 5px 5px 5px;
+  }
 }

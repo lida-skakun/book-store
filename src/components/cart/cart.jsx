@@ -60,9 +60,9 @@ export default function Cart() {
   return (
     <div className="cart">
       <section className="purchaseAndContinueButtons">
-        <Link to="/book-list">
-          <Button id="continueButton">Continue shopping</Button>
-        </Link>
+        <Button id="continueButton">
+          <Link to="/book-list">Continue shopping</Link>
+        </Button>
         {purchaseButton}
       </section>
       <Container>

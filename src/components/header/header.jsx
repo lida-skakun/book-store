@@ -43,34 +43,36 @@ export function Header() {
         <Navbar.Brand as={Link} to="/book-list">
           <h4>My book store / Lidiia Tkachova</h4>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto"></Nav>
-          {window.frames.location.hash !== "#/" &&
-            window.frames.location.hash !== "" && (
-              <Nav className="align-items-center">
-                <Nav.Item>
-                  <Nav.Link eventKey="1" as={Link} to="/cart">
-                    {quantityOfBooksInCart}
-                    <img
-                      src={cartIcon}
-                      alt="image 0f bucket"
-                      id="basketImage"
-                    />
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Button variant="dark" onClick={handleClick}>
-                    Sing-Out
-                  </Button>
-                </Nav.Item>
-                <Nav.Item>
-                  <img src={avatar} alt="user image" id="userImage" />
-                  <span>{user}</span>
-                </Nav.Item>
-              </Nav>
-            )}
-        </Navbar.Collapse>
+        {window.frames.location.hash !== "#/" &&
+          window.frames.location.hash !== "" && (
+            <>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="me-auto"></Nav>
+                <Nav className="align-items-center">
+                  <Nav.Item>
+                    <Nav.Link eventKey="1" as={Link} to="/cart">
+                      {quantityOfBooksInCart}
+                      <img
+                        src={cartIcon}
+                        alt="image 0f bucket"
+                        id="basketImage"
+                      />
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Button variant="dark" onClick={handleClick}>
+                      Sing-Out
+                    </Button>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <img src={avatar} alt="user image" id="userImage" />
+                    <span>{user}</span>
+                  </Nav.Item>
+                </Nav>
+              </Navbar.Collapse>
+            </>
+          )}
       </Container>
     </Navbar>
   );

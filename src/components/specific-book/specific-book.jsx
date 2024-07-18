@@ -1,13 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
+import {
+  Container,
+  Row,
+  Col,
+  Carousel,
+  Card,
+  Button,
+  InputGroup,
+  Form,
+} from "react-bootstrap";
 import { useUser } from "../../hooks/use-user";
 import { useBooks } from "../../hooks/use-books";
 import { useCart } from "../../hooks/use-cart";
@@ -102,7 +104,7 @@ export default function SpecificBook() {
   ));
 
   const bookImage = selectedBook.image ? (
-    <Carousel data-bs-theme="dark" className="carouselImage">
+    <Carousel data-bs-theme="dark" className="carouselImage m-auto">
       {Array.from({ length: 3 }).map((_, i) => (
         <Carousel.Item key={i}>
           <img src={selectedBook.image} alt={selectedBook.title} />
@@ -137,8 +139,10 @@ export default function SpecificBook() {
     <>
       <Container className="mt-5">
         <Row>
-          <Col xs={4}>{bookImage}</Col>
-          <Col xs={4} className="aboutBookPanel">
+          <Col xs={10} sm={6} lg={4} className="m-auto">
+            {bookImage}
+          </Col>
+          <Col sm={6} lg={4} className="aboutBookPanel">
             <h4>
               {selectedBook.title}, {selectedBook.author}
             </h4>
@@ -160,9 +164,9 @@ export default function SpecificBook() {
                 {tags}
               </li>
             </ul>
-            <p id="bookPrice">{selectedBook.price}$</p>
+            <p className="bookPrice">{selectedBook.price}$</p>
           </Col>
-          <Col xs={4}>
+          <Col md={12} lg={4} className="p-0">
             <Card id="purchasePanel">
               <h5>Purchase details</h5>
               <hr />
@@ -228,7 +232,7 @@ export default function SpecificBook() {
           </Col>
         </Row>
         <Row>
-          <Col xs={8} className="bookDescription p-5 mb-5 mt-5">
+          <Col md={12} lg={8} className="bookDescription mb-5">
             <h5>Description:</h5>
             <p>{selectedBook.description}</p>
           </Col>

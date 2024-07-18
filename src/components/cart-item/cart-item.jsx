@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Row, Col, InputGroup, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Row, Col, InputGroup, Form } from "react-bootstrap";
 import { useCart } from "../../hooks/use-cart";
 import { useUser } from "../../hooks/use-user";
 import imgNotFound from "../../img/no-image.jpg";
@@ -71,20 +71,19 @@ export default function CartItem({
 
   return (
     <Row className="CartItem purchaseDetails">
-      <Col xs={1}>
+      <Col xs={2} className="bookImageInCart">
         <Link to={`/specific-book/${id}`}>
           <img src={image ? image : imgNotFound} width={60} alt={title} />
         </Link>
       </Col>
-      <Col xs={6}>
+      <Col xs={12} md={5}>
         <h6>
           <Link to={`/specific-book/${id}`}>
             {title} by {author}
           </Link>
         </h6>
       </Col>
-
-      <Col xs={2}>
+      <Col xs={5} md={3} lg={2}>
         <InputGroup className="quantityOfBooksControl">
           <button
             type="button"
@@ -113,10 +112,10 @@ export default function CartItem({
           </button>
         </InputGroup>
       </Col>
-      <Col xs={2} id="totalPrice">
+      <Col xs={4} md={2} id="totalPrice">
         {totalPrice} $
       </Col>
-      <Col className="removeButton" xs={1}>
+      <Col className="removeButton">
         <button onClick={handleRemoveBook}>
           <img src={removeIcon} alt="delete" width={20} />
         </button>

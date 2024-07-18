@@ -83,3 +83,12 @@
 .disabled:hover {
   background-color: inherit;
 }
+
+@media (max-width: 768px) {
+  .purchaseDetails h6 {
+    font-size: 14px;
+  }
+  .bookImageInCart {
+    display: none;
+  }
+}
