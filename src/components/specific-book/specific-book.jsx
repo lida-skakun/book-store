@@ -107,7 +107,11 @@ export default function SpecificBook() {
     <Carousel data-bs-theme="dark" className="carouselImage m-auto">
       {Array.from({ length: 3 }).map((_, i) => (
         <Carousel.Item key={i}>
-          <img src={selectedBook.image} alt={selectedBook.title} />
+          <img
+            src={selectedBook.image}
+            alt={selectedBook.title}
+            data-testid="imageInCarousel"
+          />
         </Carousel.Item>
       ))}
     </Carousel>
@@ -188,7 +192,7 @@ export default function SpecificBook() {
                       -
                     </button>
                     <Form.Control
-                      aria-label="Amount (to the nearest dollar)"
+                      aria-label="Quantity of books"
                       value={quantity}
                       onChange={changeQuantityManual}
                       onBlur={handleInputBlur}
@@ -232,7 +236,7 @@ export default function SpecificBook() {
           </Col>
         </Row>
         <Row>
-          <Col md={12} lg={8} className="bookDescription mb-5">
+          <Col md={12} lg={8} className="bookDescription mb-5 mt-5">
             <h5>Description:</h5>
             <p>{selectedBook.description}</p>
           </Col>
