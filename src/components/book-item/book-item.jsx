@@ -13,15 +13,19 @@ export default function BookItem({ id, title, author, price, image }) {
               src={image ? image : imgNotFound}
               alt={title}
               className="img-fluid"
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = imgNotFound;
+              }}
             />
           </Link>
         </li>
         <li>
           <strong>
-            {title.length > 40 ? title.slice(0, 40) + "..." : title}
+            {title.length > 35 ? title.slice(0, 32) + "..." : title}
           </strong>
         </li>
-        <li>{author.length > 40 ? author.slice(0, 40) + "..." : author}</li>
+        <li>{author.length > 35 ? author.slice(0, 32) + "..." : author}</li>
         <li className="priceAndView">
           {price}$
           <Link to={`/specific-book/${id}`}>
