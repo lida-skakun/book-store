@@ -111,6 +111,10 @@ export default function SpecificBook() {
             src={selectedBook.image}
             alt={selectedBook.title}
             data-testid="imageInCarousel"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src = imgNotFound;
+            }}
           />
         </Carousel.Item>
       ))}
